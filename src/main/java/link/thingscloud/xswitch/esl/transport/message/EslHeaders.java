@@ -57,9 +57,9 @@ public class EslHeaders {
          */
         SOCKET_MODE("Socket-Mode"),
         /**
-         * {@code "Control"}
+         * {@code "CONTROL"}
          */
-        Control("Control"),
+        CONTROL("CONTROL"),
         ;
 
         private final String literal;
@@ -124,6 +124,9 @@ public class EslHeaders {
          * {@code "-ERR invalid"}
          */
         public static final String ERR_INVALID = "-ERR invalid";
+
+        private Value() {
+        }
     }
 
 }

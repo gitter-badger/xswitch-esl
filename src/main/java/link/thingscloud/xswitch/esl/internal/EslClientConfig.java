@@ -27,7 +27,9 @@ public class EslClientConfig {
     private final int port;
     private final String password;
     private int connectTimeoutMillis = 5 * 1000;
-    // Threads
+    /**
+     * Threads
+     */
     private int eventListenerThreads = 4;
     private int backgroudJobListenerThreads = 4;
     private int workerThreads = 4;

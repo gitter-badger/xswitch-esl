@@ -20,16 +20,32 @@ import link.thingscloud.xswitch.esl.transport.CommandResponse;
 import link.thingscloud.xswitch.esl.transport.event.EslEvent;
 
 /**
- * End users of the {@link EslClient} should not need to use this class.
+ * End users of the {@link link.thingscloud.xswitch.esl.IEslClient} should not need to use this class.
  * <p>
  * Allow client implementations to observe events arriving from the server.
  *
  * @author : <a href="mailto:ant.zhou@aliyun.com">zhouhailin</a>
  */
 public interface IEslProtocolListener {
+
+    /**
+     * 认证响应结果
+     * <p>
+     * 根据认证响应结果判断认证是否成功
+     *
+     * @param response
+     */
     void authResponseReceived(CommandResponse response);
 
+    /**
+     * 接收到的所有事件消息
+     *
+     * @param event
+     */
     void eventReceived(EslEvent event);
 
+    /**
+     * 链路断开回调
+     */
     void disconnected();
 }

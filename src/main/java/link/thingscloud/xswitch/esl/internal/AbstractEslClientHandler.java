@@ -19,6 +19,7 @@ package link.thingscloud.xswitch.esl.internal;
 import io.netty.channel.Channel;
 import io.netty.channel.ChannelHandlerContext;
 import io.netty.channel.SimpleChannelInboundHandler;
+import link.thingscloud.xswitch.esl.exception.EslRuntimeException;
 import link.thingscloud.xswitch.esl.transport.event.EslEvent;
 import link.thingscloud.xswitch.esl.transport.message.EslHeaders;
 import link.thingscloud.xswitch.esl.transport.message.EslMessage;
@@ -189,7 +190,8 @@ public abstract class AbstractEslClientHandler extends SimpleChannelInboundHandl
                 log.trace("awaiting latch ... ");
                 latch.await();
             } catch (InterruptedException e) {
-                throw new RuntimeException(e);
+                Thread.currentThread().interrupt();
+                throw new EslRuntimeException(e);
             }
 
             log.trace("returning response [{}]", response);

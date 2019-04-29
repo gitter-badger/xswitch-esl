@@ -22,13 +22,30 @@
 
     <groupId>link.thingscloud</groupId>
     <artifactId>xswitch-esl</artifactId>
-    <version>1.0-SNAPSHOT</version>
+    <version>0.1.0-SNAPSHOT</version>
     <packaging>jar</packaging>
 
     <name>xswitch-esl-${project.version}</name>
     <description>freeswitch event socket library on netty 4.1</description>
     <url>https://open.thingscloud.link/xswitch-esl</url>
     <inceptionYear>2019</inceptionYear>
+
+    <properties>
+        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+        <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
+
+        <!-- Compiler settings properties -->
+        <maven.compiler.source>1.8</maven.compiler.source>
+        <maven.compiler.target>1.8</maven.compiler.target>
+
+    </properties>
+
+    <scm>
+        <url>git@github.com:zhouhailin/xswitch-esl.git</url>
+        <connection>scm:git:git@github.com:zhouhailin/xswitch-esl.git</connection>
+        <developerConnection>scm:git:git@github.com:zhouhailin/xswitch-esl.git</developerConnection>
+        <tag>0.1.0-SNAPSHOT</tag>
+    </scm>
 
     <licenses>
         <license>
@@ -37,27 +54,6 @@
             <distribution>repo</distribution>
         </license>
     </licenses>
-
-    <issueManagement>
-        <system>github</system>
-        <url>https://github.com/zhouhailin/xswitch-esl/issues</url>
-    </issueManagement>
-
-    <properties>
-        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-        <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
-        <!-- Maven properties -->
-        <maven.test.skip>false</maven.test.skip>
-        <maven.javadoc.skip>true</maven.javadoc.skip>
-        <!-- Compiler settings properties -->
-        <maven.compiler.source>1.8</maven.compiler.source>
-        <maven.compiler.target>1.8</maven.compiler.target>
-        <sonar.java.coveragePlugin>jacoco</sonar.java.coveragePlugin>
-        <!-- Exclude all generated code -->
-        <sonar.jacoco.itReportPath>${project.basedir}/../test/target/jacoco-it.exec</sonar.jacoco.itReportPath>
-        <sonar.exclusions>file:**/generated-sources/**,**/test/**</sonar.exclusions>
-    </properties>
-
 
     <dependencies>
         <dependency>
@@ -113,34 +109,29 @@
                 <artifactId>maven-javadoc-plugin</artifactId>
                 <version>3.1.0</version>
                 <configuration>
-                    <charset>${project.build.sourceEncoding}</charset>
+                    <charset>UTF-8</charset>
                 </configuration>
+                <executions>
+                    <execution>
+                        <id>attach-javadocs</id>
+                        <goals>
+                            <goal>jar</goal>
+                        </goals>
+                    </execution>
+                </executions>
             </plugin>
             <plugin>
                 <artifactId>maven-source-plugin</artifactId>
                 <version>3.0.1</version>
+                <executions>
+                    <execution>
+                        <id>attach-sources</id>
+                        <goals>
+                            <goal>jar</goal>
+                        </goals>
+                    </execution>
+                </executions>
             </plugin>
-
-            <plugin>
-                <artifactId>maven-surefire-plugin</artifactId>
-                <version>3.0.0-M3</version>
-                <configuration>
-                    <forkCount>1</forkCount>
-                    <reuseForks>true</reuseForks>
-                    <testFailureIgnore>true</testFailureIgnore>
-                </configuration>
-            </plugin>
-            <plugin>
-                <groupId>org.codehaus.mojo</groupId>
-                <artifactId>findbugs-maven-plugin</artifactId>
-                <version>3.0.5</version>
-            </plugin>
-            <plugin>
-                <groupId>org.sonarsource.scanner.maven</groupId>
-                <artifactId>sonar-maven-plugin</artifactId>
-                <version>3.6.0.1398</version>
-            </plugin>
-
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-pmd-plugin</artifactId>
@@ -168,43 +159,19 @@
                     </dependency>
                 </dependencies>
             </plugin>
-
-            <plugin>
-                <groupId>org.apache.rat</groupId>
-                <artifactId>apache-rat-plugin</artifactId>
-                <version>0.12</version>
-                <configuration>
-                    <excludes>
-                        <exclude>.editorconfig</exclude>
-                        <exclude>.travis.yml</exclude>
-                        <exclude>CONTRIBUTING.md</exclude>
-                        <exclude>CODE_OF_CONDUCT.md</exclude>
-                        <exclude>CHANGELOG.md</exclude>
-                        <exclude>style/codeStyle.md</exclude>
-                        <exclude>REPORTING-BUGS.md</exclude>
-                        <exclude>README.md</exclude>
-                        <exclude>.github/**/*</exclude>
-                        <exclude>src/main/resources/*/*/*</exclude>
-                        <exclude>src/main/resources/*/*</exclude>
-                        <exclude>src/main/resources/*</exclude>
-                        <exclude>src/test/resources/*</exclude>
-                        <exclude>bin/*</exclude>
-                        <exclude>conf/*</exclude>
-                    </excludes>
-                </configuration>
-            </plugin>
-
-        </plugins>
-    </build>
-
-    <reporting>
-        <plugins>
             <plugin>
                 <groupId>org.codehaus.mojo</groupId>
-                <artifactId>findbugs-maven-plugin</artifactId>
-                <version>3.0.5</version>
+                <artifactId>cobertura-maven-plugin</artifactId>
+                <version>2.7</version>
+                <configuration>
+                    <formats>
+                        <format>html</format>
+                        <format>xml</format>
+                    </formats>
+                    <check/>
+                </configuration>
             </plugin>
         </plugins>
-    </reporting>
+    </build>
 
 </project>

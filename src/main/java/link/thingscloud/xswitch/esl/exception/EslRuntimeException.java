@@ -14,10 +14,13 @@
  * limitations under the License.
  */
 
-package link.thingscloud.xswitch.esl.option;
+package link.thingscloud.xswitch.esl.exception;
 
 /**
  * @author : <a href="mailto:ant.zhou@aliyun.com">zhouhailin</a>
  */
-public class EslOptions {
+public class EslRuntimeException extends RuntimeException {
+    public EslRuntimeException(Throwable cause) {
+        super(cause);
+    }
 }

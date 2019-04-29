@@ -1,37 +1,69 @@
-## Welcome to GitHub Pages
+# xswitch-esl
 
-You can use the [editor on GitHub](https://github.com/zhouhailin/xswitch-esl/edit/master/README.md) to maintain and preview the content for your website in Markdown files.
+[![Gitter](https://badges.gitter.im/zhouhailin/xswitch-esl.svg)](https://gitter.im/zhouhailin/xswitch-esl?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge)  
+[![Jdk Version](https://img.shields.io/badge/JDK-1.8-green.svg)](https://img.shields.io/badge/JDK-1.8-green.svg)
+[![Build Status](https://travis-ci.org/zhouhailin/xswitch-esl.svg?branch=master)](https://travis-ci.org/zhouhailin/xswitch-esl)
+[![Coverage Status](https://img.shields.io/codecov/c/github/zhouhailin/xswitch-esl/master.svg)](https://codecov.io/github/zhouhailin/xswitch-esl?branch=master&view=all#sort=coverage&dir=asc)  
+[![Maven Central](https://maven-badges.herokuapp.com/maven-central/link.thingscloud/xswitch-esl/badge.svg)](https://maven-badges.herokuapp.com/maven-central/link.thingscloud/xswitch-esl/)
+[![GitHub release](https://img.shields.io/github/release/zhouhailin/xswitch-esl.svg)](https://github.com/zhouhailin/xswitch-esl/releases)
+[![License](https://img.shields.io/badge/license-Apache%202-4EB1BA.svg)](https://www.apache.org/licenses/LICENSE-2.0.html)
 
-Whenever you commit to this repository, GitHub Pages will run [Jekyll](https://jekyllrb.com/) to rebuild the pages in your site, from the content in your Markdown files.
+## 版本迭代
 
-### Markdown
+- [x] 呼入客户端实现 - 0.1.x
+- [ ] 外呼服务端实现 - 0.2.x
 
-Markdown is a lightweight and easy-to-use syntax for styling your writing. It includes conventions for
+## 快速使用
 
-```markdown
-Syntax highlighted code block
+- java version
 
-# Header 1
-## Header 2
-### Header 3
-
-- Bulleted
-- List
-
-1. Numbered
-2. List
-
-**Bold** and _Italic_ and `Code` text
-
-[Link](url) and ![Image](src)
+```
+java version "1.8.0_181"
+Java(TM) SE Runtime Environment (build 1.8.0_181-b13)
+Java HotSpot(TM) 64-Bit Server VM (build 25.181-b13, mixed mode)
 ```
 
-For more details see [GitHub Flavored Markdown](https://guides.github.com/features/mastering-markdown/).
+- ### maven - 暂未发布
 
-### Jekyll Themes
+```
+<dependency>
+  <groupId>link.thingscloud</groupId>
+  <artifactId>xswitch-esl</artifactId>
+  <version>${xswitch-esl.version}</version>
+</dependency>
+```
 
-Your Pages site will use the layout and styles from the Jekyll theme you have selected in your [repository settings](https://github.com/zhouhailin/xswitch-esl/settings). The name of this theme is saved in the Jekyll `_config.yml` configuration file.
+- example
 
-### Support or Contact
+```
+    IEslClient client = null;
+    
+    @Before
+    public void setUp() throws Exception {
+        client = new EslInboundClient(new EslClientConfig("127.0.0.1", 8201, "ClueCon"));
+    }
 
-Having trouble with Pages? Check out our [documentation](https://help.github.com/categories/github-pages-basics/) or [contact support](https://github.com/contact) and we’ll help you sort it out.
+    @After
+    public void tearDown() throws Exception {
+        client.shutdown();
+    }
+
+    @Test
+    public void test() {
+        client.addEventListener(new IEslEventListener() {
+            @Override
+            public void eventReceived(EslEvent event) {
+
+            }
+
+            @Override
+            public void backgroundJobResultReceived(EslEvent event) {
+
+            }
+        }).start();
+    }
+```
+
+## License
+
+[Apache License, Version 2.0](http://www.apache.org/licenses/LICENSE-2.0.html) Copyright (C) Apache Software Foundation

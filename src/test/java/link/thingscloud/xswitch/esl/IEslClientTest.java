@@ -19,6 +19,9 @@ package link.thingscloud.xswitch.esl;
 import link.thingscloud.xswitch.esl.inbound.EslInboundClient;
 import link.thingscloud.xswitch.esl.internal.EslClientConfig;
 import link.thingscloud.xswitch.esl.transport.event.EslEvent;
+import org.junit.After;
+import org.junit.Before;
+import org.junit.Test;
 
 /**
  * @author : <a href="mailto:ant.zhou@aliyun.com">zhouhailin</a>
@@ -27,17 +30,17 @@ public class IEslClientTest {
 
     IEslClient client = null;
 
-
-    @org.junit.Before
+    @Before
     public void setUp() throws Exception {
         client = new EslInboundClient(new EslClientConfig("127.0.0.1", 8201, "ClueCon"));
     }
 
-    @org.junit.After
+    @After
     public void tearDown() throws Exception {
         client.shutdown();
     }
 
+    @Test
     public void test() {
         client.addEventListener(new IEslEventListener() {
             @Override
@@ -50,6 +53,5 @@ public class IEslClientTest {
 
             }
         }).start();
-
     }
 }
