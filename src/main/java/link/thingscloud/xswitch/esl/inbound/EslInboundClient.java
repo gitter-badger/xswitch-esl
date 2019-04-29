@@ -50,7 +50,6 @@ import java.util.concurrent.atomic.AtomicInteger;
  */
 public class EslInboundClient implements IEslClient {
 
-    private final Logger log = LoggerFactory.getLogger(this.getClass());
 
     private AtomicBoolean authenticatorResponded = new AtomicBoolean(false);
 
@@ -67,6 +66,8 @@ public class EslInboundClient implements IEslClient {
     private final EventLoopGroup workerGroup;
 
     private final EslClientConfig clientConfig;
+
+    private final Logger log = LoggerFactory.getLogger(this.getClass());
 
     public EslInboundClient(EslClientConfig clientConfig) {
 

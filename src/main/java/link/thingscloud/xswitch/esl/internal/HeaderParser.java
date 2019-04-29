@@ -27,6 +27,10 @@ package link.thingscloud.xswitch.esl.internal;
  * @author : <a href="mailto:ant.zhou@aliyun.com">zhouhailin</a>
  */
 public class HeaderParser {
+
+    private HeaderParser() {
+    }
+
     /**
      * Split a header in the form
      * <pre>

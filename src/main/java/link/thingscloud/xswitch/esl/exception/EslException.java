@@ -14,16 +14,17 @@
  * limitations under the License.
  */
 
-package link.thingscloud.xswitch.esl.constant;
+package link.thingscloud.xswitch.esl.exception;
 
 /**
  * @author : <a href="mailto:ant.zhou@aliyun.com">zhouhailin</a>
  */
-public class EslConstants {
+public class EslException extends Exception {
+    public EslException(Throwable cause) {
+        super(cause);
+    }
 
-    public static final String PLAIN = "plain";
-    public static final String BACKGROUND_JOB = "BACKGROUND_JOB";
-
-    private EslConstants() {
+    public EslException(String message) {
+        super(message);
     }
 }

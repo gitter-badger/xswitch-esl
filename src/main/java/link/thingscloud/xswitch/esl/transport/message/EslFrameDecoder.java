@@ -20,6 +20,7 @@ import io.netty.buffer.ByteBuf;
 import io.netty.channel.ChannelHandlerContext;
 import io.netty.handler.codec.ReplayingDecoder;
 import io.netty.handler.codec.TooLongFrameException;
+import link.thingscloud.xswitch.esl.exception.EslException;
 import link.thingscloud.xswitch.esl.internal.HeaderParser;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -87,8 +88,6 @@ public class EslFrameDecoder extends ReplayingDecoder<EslFrameDecoder.State> {
 
     @Override
     protected void decode(ChannelHandlerContext ctx, ByteBuf buffer, List<Object> out) throws Exception {
-//    protected Object decode(ChannelHandlerContext ctx, Channel channel, ChannelBuffer buffer,
-//                            State state) throws Exception {
         log.trace("decode() : state [{}]", state());
         switch (state()) {
             case READ_HEADER:
@@ -164,11 +163,11 @@ public class EslFrameDecoder extends ReplayingDecoder<EslFrameDecoder.State> {
                 return;
 
             default:
-                throw new Error("Illegal state: [" + state() + ']');
+                throw new EslException("Illegal state: [" + state() + ']');
         }
     }
 
-    private String readToLineFeedOrFail(ByteBuf buffer, int maxLineLegth) throws TooLongFrameException {
+    private String readToLineFeedOrFail(ByteBuf buffer, int maxLineLegth) {
         StringBuilder sb = new StringBuilder(64);
         while (true) {
             // this read might fail
@@ -186,7 +185,7 @@ public class EslFrameDecoder extends ReplayingDecoder<EslFrameDecoder.State> {
         }
     }
 
-    private String readLine(ByteBuf buffer, int maxLineLength) throws TooLongFrameException {
+    private String readLine(ByteBuf buffer, int maxLineLength) {
         StringBuilder sb = new StringBuilder(64);
         while (buffer.isReadable()) {
             // this read should always succeed

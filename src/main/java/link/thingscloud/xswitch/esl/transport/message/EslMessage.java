@@ -20,7 +20,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import java.util.ArrayList;
-import java.util.HashMap;
+import java.util.EnumMap;
 import java.util.List;
 import java.util.Map;
 
@@ -41,7 +41,7 @@ import java.util.Map;
 public class EslMessage {
     private final Logger log = LoggerFactory.getLogger(this.getClass());
 
-    private final Map<EslHeaders.Name, String> headers = new HashMap<>();
+    private final Map<EslHeaders.Name, String> headers = new EnumMap<>(EslHeaders.Name.class);
     private final List<String> body = new ArrayList<>();
 
     private Integer contentLength = null;
